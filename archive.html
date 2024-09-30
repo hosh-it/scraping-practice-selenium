@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- 本サイトは生成AIで作成したものを一部改良したものです -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フェイクニュースサイト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* トップ記事 */
+        .main-article {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .main-article img {
+            width: 60%; /* 元に戻す */
+            height: auto;
+        }
+
+        .main-article a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .main-article a:hover {
+            color: #007BFF;
+        }
+
+        /* サブ記事 - 見出し左、画像右に配置 */
+        .sub-articles {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sub-articles .sub-article {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .sub-articles .sub-article a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            flex-grow: 1;
+        }
+
+        .sub-articles .sub-article a:hover {
+            color: #007BFF;
+        }
+
+        .sub-articles .sub-article img {
+            width: 30%;
+            height: auto;
+            margin-left: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>フェイクニュースサイト</h1>
+    </div>
+    <div class="container">
+        <!-- トップ記事 -->
+        <div class="main-article">
+            <img src="img/coffee.png" id="top-news-img" alt="coffee">
+            <div>
+                <a href="coffee.html" id="top-news-link">コーヒーが健康に与える新たな効果、研究で発表</a>
+            </div>
+        </div>
+        <!-- サブ記事 -->
+        <div class="sub-articles">
+            <div class="sub-article">
+                <a href="sakura.html" class="sub-article-link">桜の季節が到来、各地でライトアップやイベント盛況</a>
+                <img src="img/sakura.png" class="sub-article-img" alt="sakura">
+            </div>
+            <div class="sub-article">
+                <a href="onlinemtg.html" class="sub-article-link">オンライン会議疲れを軽減する新ツール、企業で導入進む</a>
+                <img src="img/onlinemtg.png" class="sub-article-img" alt="onlinemtg">
+            </div>
+            <div class="sub-article">
+                <a href="camp.html" class="sub-article-link">キャンプブーム再燃、アウトドアグッズが売り切れ続出</a>
+                <img src="img/camp.png" class="sub-article-img" alt="camp">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

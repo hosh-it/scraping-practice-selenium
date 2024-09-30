@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログインページ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .login-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>ログイン</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="ユーザー名"><br>
+        <input type="password" id="password" placeholder="パスワード"><br>
+        <button type="button" onclick="login()">ログイン</button>
+    </form>
+    <div id="errorMessage" class="error"></div>
+</div>
+
+<script>
+    // ログイン関数
+    function login() {
+        // ユーザーが入力したIDとパスワードを取得
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var errorMessage = document.getElementById("errorMessage");
+
+        // 正しいIDとパスワード
+        var correctUsername = "hoshi";
+        var correctPassword = "pass";
+
+        // ログイン認証
+        if (username === correctUsername && password === correctPassword) {
+            // ログイン成功時はメイン画面（例: main.html）にリダイレクト
+            window.location.href = "main.html";
+        } else {
+            // ログイン失敗時はエラーメッセージを表示
+            errorMessage.innerHTML = "ユーザー名またはパスワードが間違っています";
+        }
+    }
+</script>
+
+</body>
+</html>

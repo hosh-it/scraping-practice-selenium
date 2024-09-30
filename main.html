@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フェイクニュースサイト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .main-article {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .main-article img {
+            width: 60%;
+            height: auto;
+        }
+
+        .main-article a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .main-article a:hover {
+            color: #007BFF;
+        }
+
+        .sub-articles {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sub-articles .sub-article {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .sub-articles .sub-article a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            flex-grow: 1;
+        }
+
+        .sub-articles .sub-article a:hover {
+            color: #007BFF;
+        }
+
+        .sub-articles .sub-article img {
+            width: 30%;
+            height: auto;
+            margin-left: 20px;
+        }
+
+        /* ローディングアニメーション */
+        /* ローディングアニメーション */
+        .loading {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>フェイクニュースサイト</h1>
+    </div>
+    <div class="container">
+        <!-- トップ記事 -->
+        <div class="main-article">
+            <img src="img/coffee.png" id="top-news-img" alt="coffee">
+            <div>
+                <a href="coffee.html" id="top-news-link">コーヒーが健康に与える新たな効果、研究で発表</a>
+            </div>
+        </div>
+        <!-- サブ記事 -->
+        <div class="sub-articles" id="sub-articles-container">
+            <!-- 最初に表示される3つの記事 -->
+            <div class="sub-article">
+                <a href="sakura.html" class="sub-article-link">桜の季節が到来、各地でライトアップやイベント盛況</a>
+                <img src="img/sakura.png" class="sub-article-img" alt="sakura">
+            </div>
+            <div class="sub-article">
+                <a href="onlinemtg.html" class="sub-article-link">オンライン会議疲れを軽減する新ツール、企業で導入進む</a>
+                <img src="img/onlinemtg.png" class="sub-article-img" alt="onlinemtg">
+            </div>
+            <div class="sub-article">
+                <a href="camp.html" class="sub-article-link">キャンプブーム再燃、アウトドアグッズが売り切れ続出</a>
+                <img src="img/camp.png" class="sub-article-img" alt="camp">
+            </div>
+        </div>
+
+        <!-- ローディングアニメーション -->
+        <div class="loading" id="loading"></div>
+    </div>
+
+    <script>
+        const articlesData = [
+            { link: "tech.html", title: "技術革新が加速、次世代デバイス登場", img: "img/tech.png" },
+            { link: "economy.html", title: "経済回復の兆し、世界市場が注目", img: "img/economy.png" },
+            { link: "health.html", title: "健康ブームの波、フィットネス市場拡大", img: "img/health.png" },
+            { link: "travel.html", title: "観光業が復活、旅行需要が急増", img: "img/travel.png" },
+            { link: "space.html", title: "宇宙探査の新時代、民間企業が参入", img: "img/space.png" },
+            { link: "education.html", title: "教育のデジタル化が進展、未来の学び方", img: "img/education.png" },
+            { link: "food.html", title: "食の未来、新技術で持続可能な食文化", img: "img/food.png" },
+            { link: "sports.html", title: "スポーツの進化、テクノロジーが支える", img: "img/sports.png" },
+            { link: "art.html", title: "アートとテクノロジーの融合、未来の表現", img: "img/art.png" }
+        ];
+
+        let articleIndex = 0;  // すでに最初の3つの記事が表示されているため3から開始
+        const articlesPerScroll = 3;  // 一回のスクロールで追加される記事数
+        const totalArticles = articlesData.length;
+        let isLoading = false;  // スクロール処理が重複しないようにフラグを追加
+
+        // 記事を追加する関数
+        function addArticles() {
+            const container = document.getElementById("sub-articles-container");
+
+            // 一度に3つずつ記事を追加する
+            for (let i = 0; i < articlesPerScroll; i++) {
+                if (articleIndex < totalArticles) {
+                    const article = articlesData[articleIndex];
+                    const subArticle = document.createElement('div');
+                    subArticle.className = 'sub-article';
+
+                    subArticle.innerHTML = `
+                        <a href="${article.link}" class="sub-article-link">${article.title}</a>
+                        <img src="${article.img}" class="sub-article-img" alt="${article.title}">
+                    `;
+                    container.appendChild(subArticle);
+                    articleIndex++;
+                }
+            }
+            isLoading = false;  // 記事の追加が終わったらフラグをリセット
+        }
+
+        // スクロールイベントで記事を追加
+        window.addEventListener('scroll', () => {
+            if (!isLoading && (window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                isLoading = true;  // スクロール処理が始まったらフラグを立てる
+                const loading = document.getElementById('loading');
+
+                // まだ追加する記事が残っているか確認
+                if (articleIndex < totalArticles) {
+                    loading.style.display = 'block';
+
+                    // 1秒後に記事を追加して、ローディングアニメーションを非表示に
+                    setTimeout(() => {
+                        addArticles();
+                        loading.style.display = 'none';
+                    }, 1000);
+                } else {
+                    // すべての記事が表示された場合、ローディングアニメーションを非表示
+                    loading.style.display = 'none';
+                }
+            }
+        });
+
+        // 最初の3記事は初期状態でロード済み
+    </script>
+</body>
+</html>

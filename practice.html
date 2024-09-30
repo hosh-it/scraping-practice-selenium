@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width:100px;
+        }
+        .size-middle{
+            width:50px;
+        }
+        #small-size{
+            width:25px;
+        }
+    </style>
+</head>
+<body>
+    <h1>スクレイピング練習</h1>
+    <img src="img/1.png"/>
+    <a href="practice2.html">2ページ目へのリンク先</a>
+    <img src="img/1.png" class="size-middle"/>
+    <a href="practice2.html">3ページ目へのリンク先</a>
+    <img src="img/1.png" class="size-middle" id="small-size"/>
+    <a href="practice2.html">4ページ目へのリンク先</a>
+    <script>
+        document.querySelector(".size-middle").addEventListener("click", function(){
+            alert('スクイピングを学びましょう！');
+        })
+    </script>
+</body>
+</html>
