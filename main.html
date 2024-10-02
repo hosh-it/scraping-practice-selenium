@@ -171,6 +171,10 @@
                     `;
                     container.appendChild(subArticle);
                     articleIndex++;
+                    console.log(`Added article ${articleIndex}: ${article.title}`);
+                }else{
+                    console.log('No more articles to add.');
+                    break;  // これ以上追加する記事がない場合はループを抜ける
                 }
             }
             isLoading = false;  // 記事の追加が終わったらフラグをリセット
@@ -178,10 +182,10 @@
 
         // スクロールイベントで記事を追加
         window.addEventListener('scroll', () => {
-            if (!isLoading && (window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            if (!isLoading && Math.ceil(window.innerHeight + window.scrollY) >= Math.floor(document.body.offsetHeight)) {
                 isLoading = true;  // スクロール処理が始まったらフラグを立てる
                 const loading = document.getElementById('loading');
-
+                console.log('Loading more articles...');
                 // まだ追加する記事が残っているか確認
                 if (articleIndex < totalArticles) {
                     loading.style.display = 'block';
@@ -197,8 +201,6 @@
                 }
             }
         });
-
-        // 最初の3記事は初期状態でロード済み
     </script>
 </body>
 </html>
